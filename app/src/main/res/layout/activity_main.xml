@@ -38,6 +38,7 @@
             android:inputType="textUri"
             android:paddingHorizontal="15dp"
             android:textSize="14sp"
+            android:selectAllOnFocus="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/backwardButton"
             app:layout_constraintStart_toEndOf="@id/homeButton"

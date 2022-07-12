@@ -1,11 +1,13 @@
 package com.example.myapplication
 
 import android.content.Context
+import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.webkit.URLUtil
+import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.EditText
@@ -49,9 +51,10 @@ class MainActivity : AppCompatActivity() {
     // 초기 웹뷰 실행
     private fun initWebView(){
         webView.apply {
-            webViewClient = WebViewClient()
+            webViewClient = WebViewClientClass()
+            webChromeClient = WebChromeClient()
             settings.javaScriptEnabled = true
-            loadUrl("https://www.google.com")
+            loadUrl(DEFAULT_URL)
         }
     }
 
@@ -79,7 +82,7 @@ class MainActivity : AppCompatActivity() {
 
         // home 버튼 이벤트
         homeButton.setOnClickListener {
-            webView.loadUrl("https://www.google.com")
+            webView.loadUrl(DEFAULT_URL)
         }
 
         // forward 버튼 이벤트
@@ -95,10 +98,30 @@ class MainActivity : AppCompatActivity() {
         // swipe refresh 이벤트
         swipeRefresh.setOnRefreshListener{
             webView.reload()
-            // refresh 창 없애기
-            swipeRefresh.isRefreshing = false
         }
     }
 
+    inner class WebViewClientClass: WebViewClient() {
+        override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+            super.onPageStarted(view, url, favicon)
+        }
 
+        override fun onPageFinished(view: WebView?, url: String?) {
+            super.onPageFinished(view, url)
+
+            // refresh 창 없애기
+            swipeRefresh.isRefreshing = false
+
+            // forward, backward 가능할 경우 button 활성화
+            forwardButton.isEnabled = webView.canGoForward()
+            backwardButton.isEnabled = webView.canGoBack()
+
+            // text애 현재 웹 주소 표시
+            addressBar.setText(url)
+        }
+    }
+
+    companion object {
+        const val DEFAULT_URL = "https://www.google.com"
+    }
 }
