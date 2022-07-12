@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.webkit.URLUtil
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.EditText
@@ -54,17 +55,24 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // WebView
+   // WebView
    private fun bindWebView(){
 
         // addressBar 주소 입력 이벤트
         addressBar.setOnEditorActionListener{ view, actionId, event ->
             if(actionId == EditorInfo.IME_ACTION_GO){
+                //URL 체크
+                var url = view.text.toString()
+                if (URLUtil.isNetworkUrl(url)) {
+                    // 웹 페이지 로딩
+                    webView.loadUrl(view.text.toString())
+                } else {
+                    webView.loadUrl("https://$url")
+                }
+
                 // 키보드 내리기
                 val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(addressBar.windowToken, 0)
-                // 웹 페이지 로딩
-                webView.loadUrl(view.text.toString())
             }
             return@setOnEditorActionListener false
         }
@@ -84,8 +92,10 @@ class MainActivity : AppCompatActivity() {
             webView.goBack()
         }
 
+        // swipe refresh 이벤트
         swipeRefresh.setOnRefreshListener{
             webView.reload()
+            // refresh 창 없애기
             swipeRefresh.isRefreshing = false
         }
     }
