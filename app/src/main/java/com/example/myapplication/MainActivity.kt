@@ -9,6 +9,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.EditText
 import android.widget.ImageButton
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,6 +31,10 @@ class MainActivity : AppCompatActivity() {
 
     private val homeButton: ImageButton by lazy {
         findViewById(R.id.homeButton)
+    }
+
+    private val swipeRefresh: SwipeRefreshLayout by lazy {
+        findViewById(R.id.refreshLayout)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,6 +82,11 @@ class MainActivity : AppCompatActivity() {
         // backward 버튼 이벤트
         backwardButton.setOnClickListener{
             webView.goBack()
+        }
+
+        swipeRefresh.setOnRefreshListener{
+            webView.reload()
+            swipeRefresh.isRefreshing = false
         }
     }
 
