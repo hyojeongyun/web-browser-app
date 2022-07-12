@@ -16,9 +16,10 @@
 
         <ImageButton
             android:id="@+id/homeButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:backgroundTint="#00FFFFFF"
+            android:background="@drawable/button_ripple"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -40,9 +41,10 @@
 
         <ImageButton
             android:id="@+id/backwardButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:backgroundTint="#00FFFFFF"
+            android:background="@drawable/button_ripple"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/forwardButton"
             app:layout_constraintTop_toTopOf="parent"
@@ -51,9 +53,10 @@
 
         <ImageButton
             android:id="@+id/forwardButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:backgroundTint="#00FFFFFF"
+            android:background="@drawable/button_ripple"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
