@@ -111,6 +111,7 @@ class MainActivity : AppCompatActivity() {
         override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
             super.onPageStarted(view, url, favicon)
 
+            // progressBar 보이기
             progressBar.show()
         }
 
@@ -121,6 +122,7 @@ class MainActivity : AppCompatActivity() {
             // refresh 창 없애기
             swipeRefresh.isRefreshing = false
 
+            // progressBar 숨기기
             progressBar.hide()
 
             // forward, backward 가능할 경우 button 활성화
@@ -136,6 +138,7 @@ class MainActivity : AppCompatActivity() {
         override fun onProgressChanged(view: WebView?, newProgress: Int) {
             super.onProgressChanged(view, newProgress)
 
+            // 로딩되는 동안 progress 보여주기
             progressBar.progress = newProgress
         }
     }
