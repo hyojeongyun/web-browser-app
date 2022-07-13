@@ -12,6 +12,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.EditText
 import android.widget.ImageButton
+import androidx.core.widget.ContentLoadingProgressBar
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
 class MainActivity : AppCompatActivity() {
@@ -38,6 +39,10 @@ class MainActivity : AppCompatActivity() {
 
     private val swipeRefresh: SwipeRefreshLayout by lazy {
         findViewById(R.id.refreshLayout)
+    }
+
+    private val progressBar: ContentLoadingProgressBar by lazy {
+        findViewById(R.id.progressBar)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -102,22 +107,36 @@ class MainActivity : AppCompatActivity() {
     }
 
     inner class WebViewClientClass: WebViewClient() {
+        // 페이지 로딩 시작
         override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
             super.onPageStarted(view, url, favicon)
+
+            progressBar.show()
         }
 
+        // 페이지 로딩 완료
         override fun onPageFinished(view: WebView?, url: String?) {
             super.onPageFinished(view, url)
 
             // refresh 창 없애기
             swipeRefresh.isRefreshing = false
 
+            progressBar.hide()
+
             // forward, backward 가능할 경우 button 활성화
             forwardButton.isEnabled = webView.canGoForward()
             backwardButton.isEnabled = webView.canGoBack()
 
-            // text애 현재 웹 주소 표시
+            // text에 현재 웹 주소 표시
             addressBar.setText(url)
+        }
+    }
+
+    inner class WebChromeClientClass: WebChromeClient() {
+        override fun onProgressChanged(view: WebView?, newProgress: Int) {
+            super.onProgressChanged(view, newProgress)
+
+            progressBar.progress = newProgress
         }
     }
 
