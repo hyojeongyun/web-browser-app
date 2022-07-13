@@ -69,16 +69,6 @@
             app:srcCompat="@drawable/ic_baseline_arrow_forward_24"
             tools:ignore="SpeakableTextPresentCheck" />
 
-        <androidx.core.widget.ContentLoadingProgressBar
-            android:id="@+id/progressBar"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_width="0dp"
-            android:layout_height="2dp"
-            android:progressBackgroundTint="@color/purple_200"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/toolBar" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -96,5 +86,14 @@
             android:layout_height="match_parent"
             app:layout_constraintTop_toBottomOf="@id/toolBar" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/progressBar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolBar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

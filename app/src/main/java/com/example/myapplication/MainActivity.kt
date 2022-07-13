@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
     private fun initWebView(){
         webView.apply {
             webViewClient = WebViewClientClass()
-            webChromeClient = WebChromeClient()
+            webChromeClient = WebChromeClientClass()
             settings.javaScriptEnabled = true
             loadUrl(DEFAULT_URL)
         }
