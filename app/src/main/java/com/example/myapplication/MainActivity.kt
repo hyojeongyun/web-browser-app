@@ -65,7 +65,6 @@ class MainActivity : AppCompatActivity() {
 
    // WebView
    private fun bindWebView(){
-
         // addressBar 주소 입력 이벤트
         addressBar.setOnEditorActionListener{ view, actionId, event ->
             if(actionId == EditorInfo.IME_ACTION_GO){
